@@ -484,9 +484,8 @@ if ospath.exists('categories.txt'):
                 tempdict['index_link'] = ''
             categories[name] = tempdict
 
-if BASE_URL:
-    PORT = environ.get('PORT')
-    Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT}", shell=True)
+PORT = environ.get('PORT')
+Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT}", shell=True)
 
 srun(["qbittorrent-nox", "-d", f"--profile={getcwd()}"])
 if not ospath.exists('.netrc'):
