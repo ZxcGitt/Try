@@ -120,7 +120,7 @@ def bt_selection_buttons(id_, isCanCncl=True):
 def get_progress_bar_string(status):
     FINISHED_PROGRESS_STR = '█' # '■'
     UN_FINISHED_PROGRESS_STR = '▒' # '□'
-    MULTI_WORKING_PROGRESS_STR = '▁ ▂ ▃ ▄ ▅ ▆ ▇'
+    MULTI_WORKING_PROGRESS_STR = '▁▂▃▄▅▆▇'
     completed = status.processed_bytes() / 8
     total = status.size_raw() / 8
     p = 0 if total == 0 else round(completed * 100 / total)
