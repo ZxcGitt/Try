@@ -131,7 +131,7 @@ def get_progress_bar_string(status):
     if cPart >= 0:
         p_str += config_dict['MULTI_WORKING_PROGRESS_STR'][cPart]
     p_str += config_dict['UN_FINISHED_PROGRESS_STR']  * (12 - cFull)
-    return p_str
+    return f"{p_str}"
 
 def get_readable_message():
     msg = ""
@@ -145,7 +145,7 @@ def get_readable_message():
     for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
         msg += f"<b>{download.status()}</b>: <code>{escape(str(download.name()))}</code>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
-            msg += f"\n[{get_progress_bar_string(download.processed_bytes(), download.size_raw())}] {download.progress()}"
+            msg += f"\n {get_progress_bar_string(download)}</b> {download.progress()}"
             msg += f"\n<b>Processed</b>: {get_readable_file_size(download.processed_bytes())} of {download.size()}"
             msg += f"\n<b>Speed</b>: {download.speed()} | <b>ETA</b>: {download.eta()}"
             if hasattr(download, 'seeders_num'):
