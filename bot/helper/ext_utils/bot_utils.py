@@ -161,8 +161,8 @@ def get_readable_message():
         else:
             msg += f"\n<b>├ Size</b>: {download.size()}"
         msg += f"\n<b>├ Source</b>: {download.source}"
-        msg += f"\n<b>├ ETA</b>: {download.eta()}"
         msg += f"\n<b>├ Elapsed</b>: {get_readable_time(time() - download.startTime)}"
+        msg += f"\n<b>├ Estimate</b>: {download.eta()}"
         msg += f"\n<b>├ Upload</b>: {download.mode}"
         msg += f"\n<b>└ Stop</b>: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
         if STATUS_LIMIT and index == STATUS_LIMIT:
@@ -196,9 +196,11 @@ def get_readable_message():
         buttons.ibutton(f"{PAGE_NO}/{PAGES} ({tasks})", "status ref")
         buttons.ibutton(">>", "status nex")
         button = buttons.build_menu(3)
-    msg += f"<b>CPU</b>: {cpu_percent()}% | <b>FREE</b>: {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
-    msg += f"\n<b>RAM</b>: {virtual_memory().percent}% | <b>UPTIME</b>: {get_readable_time(time() - botStartTime)}"
-    msg += f"\n<b>DL</b>: {get_readable_file_size(dl_speed)}/s | <b>UL</b>: {get_readable_file_size(up_speed)}/s"
+    msg += f"<b>Bot uptime</b>: {get_readable_time(time() - botStartTime)}"
+    msg += f"\n<b>CPU</b>: {cpu_percent()}% | <b>FREE</b>: {get_readable_file_size(disk_usage(DOWNLOAD_DIR).free)}"
+    msg += f"\n<b>RAM</b>: {virtual_memory().percent}%"
+    msg += f"\n<b>Total downloading speed</b>: {get_readable_file_size(dl_speed)}/s"
+    msg += f"\n<b>Total uploading speed</b>: {get_readable_file_size(up_speed)}/s"
     return msg, button
 
 def extra_btns(buttons):
