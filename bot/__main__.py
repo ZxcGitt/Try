@@ -66,7 +66,7 @@ async def stats(client, message):
             f'<b>• RAM Usage:</b> {mem_p}%\n'\
             f'<b>• Disk Usage:</b> {disk}%\n'\
             f'<b>• Free Disk Space:</b> {free}\n'\
-            f'<b>• Total Disk Space:</b> {total}\n'\
+            f'<b>• Total Disk Space:</b> {total}\n'
     await sendMessage(message, stats)
 
 async def start(client, message):
