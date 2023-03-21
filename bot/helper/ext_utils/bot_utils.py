@@ -117,14 +117,20 @@ def bt_selection_buttons(id_, isCanCncl=True):
     buttons.ibutton("Done Selecting", f"btsel done {gid} {id_}")
     return buttons.build_menu(2)
 
-def get_progress_bar_string(processed_bytes, total_bytes):
-    completed = processed_bytes / 8
-    total = total_bytes / 8
+def get_progress_bar_string(status):
+    FINISHED_PROGRESS_STR = '█' # '■'
+    UN_FINISHED_PROGRESS_STR = '▒' # '□'
+    MULTI_WORKING_PROGRESS_STR = '▁ ▂ ▃ ▄ ▅ ▆ ▇'
+    completed = status.processed_bytes() / 8
+    total = status.size_raw() / 8
     p = 0 if total == 0 else round(completed * 100 / total)
     p = min(max(p, 0), 100)
     cFull = p // 8
-    p_str = '■' * cFull
-    p_str += '□' * (12 - cFull)
+    cPart = p % 8 - 1
+    p_str = config_dict['FINISHED_PROGRESS_STR'] * cFull
+    if cPart >= 0:
+        p_str += config_dict['MULTI_WORKING_PROGRESS_STR'][cPart]
+    p_str += config_dict['UN_FINISHED_PROGRESS_STR']  * (12 - cFull)
     return p_str
 
 def get_readable_message():
