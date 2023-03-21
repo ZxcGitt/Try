@@ -41,24 +41,30 @@ async def stats(client, message):
     if await aiopath.exists('.git'):
         last_commit = await cmd_exec("git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'", True)
         last_commit = last_commit[0]
+        commit_from = check_output(["git log -1 --date=short --pretty=format:'%cr'"], shell=True).decode()
+        commit_date = check_output(["git log -1 --date=format:'%d %B %Y' --pretty=format:'%ad'"], shell=True).decode()
+        commit_time = check_output(["git log -1 --date=format:'%I:%M:%S %p' --pretty=format:'%ad'"], shell=True).decode()
+        
     else:
         last_commit = 'No UPSTREAM_REPO'
-    stats = f'<b>Commit Date</b>: {last_commit}\n\n'\
-            f'<b>Bot Uptime</b>: {get_readable_time(time() - botStartTime)}\n'\
-            f'<b>OS Uptime</b>: {get_readable_time(time() - boot_time())}\n\n'\
-            f'<b>Total Disk Space </b>: {get_readable_file_size(total)}\n'\
-            f'<b>Used</b>: {get_readable_file_size(used)} | <b>Free</b>: {get_readable_file_size(free)}\n\n'\
-            f'<b>Upload</b>: {get_readable_file_size(net_io.bytes_sent)}\n'\
-            f'<b>Download</b>: {get_readable_file_size(net_io.bytes_recv)}\n\n'\
-            f'<b>CPU</b>: {cpu_percent(interval=0.5)}%\n'\
-            f'<b>RAM</b>: {get_progress_bar_string(memory.used, memory.total)} {memory.percent}%\n'\
-            f'<b>DISK</b>: {get_progress_bar_string(used, total)} {disk}%\n\n'\
-            f'<b>Physical Cores</b>: {cpu_count(logical=False)}\n'\
-            f'<b>Total Cores</b>: {cpu_count(logical=True)}\n\n'\
-            f'<b>SWAP</b>: {get_readable_file_size(swap.total)} | <b>Used</b>: {swap.percent}%\n'\
-            f'<b>Memory Total</b>: {get_readable_file_size(memory.total)}\n'\
-            f'<b>Memory Free</b>: {get_readable_file_size(memory.available)}\n'\
-            f'<b>Memory Used</b>: {get_readable_file_size(memory.used)}\n'
+    stats = f'<b><u>REPOSITORY INFO</u></b>\n\n' \
+            f'<b>• Repository Version:</b> {version}\n'\
+            f'<b>• Updated:</b> {commit_date}\n'\
+            f'<b>• </b>{commit_time}\n'\
+            f'<b>• </b>{commit_from}\n'\
+            f'\n'\
+            f'<b><u>BOT INFO</u></b>\n\n'\
+            f'<b>• Uptime:</b> {currentTime}\n'\
+            f'<b>• System:</b> {osUptime}\n'\
+            f'\n'\
+            f'<b><u>SYSTEM INFO</u></b>\n\n'\
+            f'<b>• CPU Usage:</b> {cpuUsage}%\n'\
+            f'<b>• RAM Usage:</b> {mem_p}%\n'\
+            f'<b>• Disk Usage:</b> {disk}%\n'\
+            f'<b>• Free Disk Space:</b> {free}\n'\
+            f'<b>• Total Disk Space:</b> {total}\n'\
+            f'<b>• Uploaded Data:</b> {sent}\n'\
+            f'<b>• Downloaded Data:</b> {recv}\n\n'
     await sendMessage(message, stats)
 
 async def start(client, message):
