@@ -32,7 +32,7 @@ from .modules import (anonymous, authorize, bot_settings, bt_select,
                       drive_list, eval, mirror_leech, rmdb, rss,
                       save_message, search, shell, status, users_settings, ytdlp)
 
-
+version = "5.1.7"
 async def stats(client, message):
     total, used, free, disk = disk_usage('/')
     swap = swap_memory()
