@@ -29,17 +29,17 @@ PAGES = 0
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Upload"
-    STATUS_DOWNLOADING = "Download"
-    STATUS_CLONING = "Clone"
+    STATUS_UPLOADING = "Uploading"
+    STATUS_DOWNLOADING = "Downloading"
+    STATUS_CLONING = "Cloning"
     STATUS_QUEUEDL = "QueueDl"
     STATUS_QUEUEUP = "QueueUp"
     STATUS_PAUSED = "Pause"
-    STATUS_ARCHIVING = "Archive"
-    STATUS_EXTRACTING = "Extract"
-    STATUS_SPLITTING = "Split"
+    STATUS_ARCHIVING = "Archiving"
+    STATUS_EXTRACTING = "Extracting"
+    STATUS_SPLITTING = "Splitting"
     STATUS_CHECKING = "CheckUp"
-    STATUS_SEEDING = "Seed"
+    STATUS_SEEDING = "Seeding"
 
 SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
 
@@ -234,17 +234,17 @@ def get_readable_time(seconds):
     (days, remainder) = divmod(seconds, 86400)
     days = int(days)
     if days != 0:
-        result += f'{days}d'
+        result += f'{days} Days'
     (hours, remainder) = divmod(remainder, 3600)
     hours = int(hours)
     if hours != 0:
-        result += f'{hours}h'
+        result += f'{hours} Hours'
     (minutes, seconds) = divmod(remainder, 60)
     minutes = int(minutes)
     if minutes != 0:
-        result += f'{minutes}m'
+        result += f'{minutes} Min'
     seconds = int(seconds)
-    result += f'{seconds}s'
+    result += f'{seconds} Sec'
     return result
 
 def is_magnet(url):
