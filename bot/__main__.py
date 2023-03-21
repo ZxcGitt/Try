@@ -41,9 +41,9 @@ async def stats(client, message):
     if await aiopath.exists('.git'):
         last_commit = await cmd_exec("git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'", True)
         last_commit = last_commit[0]
-        commit_from = cmd_exec("git log -1 --date=short --pretty=format:'%cr'", True)
-        commit_date = cmd_exec("git log -1 --date=format:'%d %B %Y' --pretty=format:'%ad'", True)
-        commit_time = cmd_exec("git log -1 --date=format:'%I:%M:%S %p' --pretty=format:'%ad'", True)
+        commit_from = await cmd_exec("git log -1 --date=short --pretty=format:'%cr'", True)
+        commit_date = await cmd_exec("git log -1 --date=format:'%d %B %Y' --pretty=format:'%ad'", True)
+        commit_time = await cmd_exec("git log -1 --date=format:'%I:%M:%S %p' --pretty=format:'%ad'", True)
         
     else:
         last_commit = 'No UPSTREAM_REPO'
