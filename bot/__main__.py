@@ -48,8 +48,9 @@ async def stats(client, message):
         commit_from = await cmd_exec("git log -1 --date=short --pretty=format:'%cr'", True)
         commit_from = commit_from[0]
         commit_date = await cmd_exec("git log -1 --date=format:'%d %B %Y' --pretty=format:'%ad'", True)
+        commit_date = commit_date[0]
         commit_time = await cmd_exec("git log -1 --date=format:'%I:%M:%S %p' --pretty=format:'%ad'", True)
-        
+        commit_time = commit_time[0]
     else:
         last_commit = 'No UPSTREAM_REPO'
     stats = f'<b><u>REPOSITORY INFO</u></b>\n\n' \
@@ -66,8 +67,8 @@ async def stats(client, message):
             f'<b>• CPU Usage:</b> {cpuUsage}%\n'\
             f'<b>• RAM Usage:</b> {mem_p}%\n'\
             f'<b>• Disk Usage:</b> {disk}%\n'\
-            f'<b>• Free Disk Space:</b> {free}\n'\
-            f'<b>• Total Disk Space:</b> {total}\n'
+            f'<b>• Free Disk Space:</b> {get_readable_file_size(free)}\n'\
+            f'<b>• Total Disk Space:</b> {get_readable_file_size(total)}\n'
     await sendMessage(message, stats)
 
 async def start(client, message):
