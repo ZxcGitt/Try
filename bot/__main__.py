@@ -81,6 +81,7 @@ async def restart(client, message):
     if QbInterval:
         QbInterval[0].cancel()
         QbInterval.clear()
+    alive.kill()
     await sync_to_async(clean_all)
     await (await create_subprocess_exec('pkill', '-9', '-f', '-e', 'gunicorn|aria2c|qbittorrent-nox|ffmpeg')).wait()
     await (await create_subprocess_exec('python3', 'update.py')).wait()
