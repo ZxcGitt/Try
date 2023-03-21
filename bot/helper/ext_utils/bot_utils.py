@@ -145,7 +145,7 @@ def get_readable_message():
     for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
         msg += f"<b>{download.status()}</b>: <code>{escape(str(download.name()))}</code>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
-            msg += f"\n {get_progress_bar_string(download)}</b> {download.progress()}"
+            msg += f"\n<b>{get_progress_bar_string(download)}</b> {download.progress()}"
             msg += f"\n<b>Processed</b>: {get_readable_file_size(download.processed_bytes())} of {download.size()}"
             msg += f"\n<b>Speed</b>: {download.speed()} | <b>ETA</b>: {download.eta()}"
             if hasattr(download, 'seeders_num'):
@@ -240,15 +240,15 @@ def get_readable_time(seconds):
     (days, remainder) = divmod(seconds, 86400)
     days = int(days)
     if days != 0:
-        result += f'{days} Days'
+        result += f'{days} Days '
     (hours, remainder) = divmod(remainder, 3600)
     hours = int(hours)
     if hours != 0:
-        result += f'{hours} Hours'
+        result += f'{hours} Hours '
     (minutes, seconds) = divmod(remainder, 60)
     minutes = int(minutes)
     if minutes != 0:
-        result += f'{minutes} Min'
+        result += f'{minutes} Min '
     seconds = int(seconds)
     result += f'{seconds} Sec'
     return result
