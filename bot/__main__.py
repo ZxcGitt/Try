@@ -15,7 +15,7 @@ from pyrogram.handlers import MessageHandler
 
 from bot import (DATABASE_URL, INCOMPLETE_TASK_NOTIFIER, LOGGER,
                  STOP_DUPLICATE_TASKS, Interval, QbInterval, bot, botStartTime,
-                 config_dict, scheduler)
+                 config_dict, scheduler, alive)
 
 from .helper.ext_utils.bot_utils import (cmd_exec, get_progress_bar_string,
                                          get_readable_file_size,
