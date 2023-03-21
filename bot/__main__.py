@@ -38,6 +38,10 @@ async def stats(client, message):
     swap = swap_memory()
     memory = virtual_memory()
     net_io = net_io_counters()
+    currentTime = get_readable_time(time() - botStartTime)
+    mem_p = memory.percent
+    osUptime = get_readable_time(time() - boot_time())
+    cpuUsage = cpu_percent(interval=0.5)
     if await aiopath.exists('.git'):
         last_commit = await cmd_exec("git log -1 --date=short --pretty=format:'%cd <b>From</b> %cr'", True)
         last_commit = last_commit[0]
@@ -63,8 +67,6 @@ async def stats(client, message):
             f'<b>• Disk Usage:</b> {disk}%\n'\
             f'<b>• Free Disk Space:</b> {free}\n'\
             f'<b>• Total Disk Space:</b> {total}\n'\
-            f'<b>• Uploaded Data:</b> {sent}\n'\
-            f'<b>• Downloaded Data:</b> {recv}\n\n'
     await sendMessage(message, stats)
 
 async def start(client, message):
