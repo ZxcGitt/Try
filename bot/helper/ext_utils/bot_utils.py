@@ -142,28 +142,29 @@ def get_readable_message():
             globals()['PAGE_NO'] -= 1
     for index, download in enumerate(list(download_dict.values())[COUNT:], start=1):
         msg += f"<b>{escape(str(download.name()))}</b>"
-        msg += f"\n\n<b>{download.status()} with {download.engine}</b>"
+        msg += f"\n\n<b>┌ {download.status()} with {download.engine}</b>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING]:
-            msg += f"\n<b>{get_progress_bar_string(download)}</b> {download.progress()}"
-            msg += f"\n<b>Processed</b>: {get_readable_file_size(download.processed_bytes())} of {download.size()}"
-            msg += f"\n<b>Speed</b>: {download.speed()} | <b>ETA</b>: {download.eta()}"
+            msg += f"\n<b>├ {get_progress_bar_string(download)}</b> {download.progress()}"
+            msg += f"\n<b>├ Processed</b>: {get_readable_file_size(download.processed_bytes())} of {download.size()}"
+            msg += f"\n<b>├ Speed</b>: {download.speed()}"
             if hasattr(download, 'seeders_num'):
                 try:
-                    msg += f"\n<b>Seeders</b>: {download.seeders_num()} | <b>Leechers</b>: {download.leechers_num()}"
+                    msg += f"\n<b>├ Seeders</b>: {download.seeders_num()} | <b>Leechers</b>: {download.leechers_num()}"
                 except:
                     pass
         elif download.status() == MirrorStatus.STATUS_SEEDING:
-            msg += f"\n<b>Size</b>: {download.size()}"
-            msg += f"\n<b>Speed</b>: {download.upload_speed()}"
+            msg += f"\n<b>├ Size</b>: {download.size()}"
+            msg += f"\n<b>├ Speed</b>: {download.upload_speed()}"
             msg += f" | <b>Uploaded</b>: {download.uploaded_bytes()}"
-            msg += f"\n<b>Ratio</b>: {download.ratio()}"
+            msg += f"\n<b>├ Ratio</b>: {download.ratio()}"
             msg += f" | <b>Time</b>: {download.seeding_time()}"
         else:
-            msg += f"\n<b>Size</b>: {download.size()}"
-        msg += f"\n<b>Source</b>: {download.source}"
-        msg += f"\n<b>Elapsed</b>: {get_readable_time(time() - download.startTime)}"
-        msg += f"\n<b>Upload</b>: {download.mode}"
-        msg += f"\n<b>Stop</b>: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
+            msg += f"\n<b>├ Size</b>: {download.size()}"
+        msg += f"\n<b>├ Source</b>: {download.source}"
+        msg += f"\n<b>├ ETA</b>: {download.eta()}"
+        msg += f"\n<b>├ Elapsed</b>: {get_readable_time(time() - download.startTime)}"
+        msg += f"\n<b>├ Upload</b>: {download.mode}"
+        msg += f"\n<b>└ Stop</b>: <code>/{BotCommands.CancelMirror} {download.gid()}</code>\n\n"
         if STATUS_LIMIT and index == STATUS_LIMIT:
             break
     if len(msg) == 0:
