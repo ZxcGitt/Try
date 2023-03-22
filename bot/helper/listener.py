@@ -334,7 +334,6 @@ class MirrorLeechListener:
             if typ != 0:
                 msg += f'\n<b>Corrupted Files</b>: {typ}'
             msg += f'\n<b>Leeched by</b>: {self.tag}'
-            msg += f"\n<b>Upload</b>: {self.mode}\n\n"
             if not files:
                 await sendMessage(self.message, msg)
                 if self.logMessage:
@@ -383,7 +382,7 @@ class MirrorLeechListener:
             if typ == "Folder":
                 msg += f'\n<b>SubFolders</b>: {folders}'
                 msg += f'\n<b>Files</b>: {files}'
-            msg += f'\n<b>Cloned by</b>: {self.tag}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}'
+            msg += f'\n<b>Uploaded by</b>: {self.tag}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}'
             if config_dict['GDRIVE_ID'] != drive_id or self.select:
                 msg += f"\n\n<b>Folder id</b>: <code>{drive_id}</code>"
             buttons = ButtonMaker()
