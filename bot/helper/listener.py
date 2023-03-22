@@ -379,7 +379,7 @@ class MirrorLeechListener:
                 msg = f'<b>Name</b>: <code>.{escape(name).replace(" ", "-").replace(".", ",")}</code>\n\n<b>Size</b>: {size}'
             else:
                 msg = f'<b>Name</b>: <code>{escape(name)}</code>\n\n<b>Size</b>: {size}'
-            msg += f'\n\n<b>Type</b>: {typ}'
+            msg += f'\n<b>Type</b>: {typ}'
             if typ == "Folder":
                 msg += f'\n<b>SubFolders</b>: {folders}'
                 msg += f'\n<b>Files</b>: {files}'
