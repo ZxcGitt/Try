@@ -333,7 +333,7 @@ class MirrorLeechListener:
             msg += f"\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
             if typ != 0:
                 msg += f'\n<b>Corrupted Files</b>: {typ}'
-            msg += f'\n<b>#cc</b>: {self.tag}'
+            msg += f'\n<b>Leeched by</b>: {self.tag}'
             msg += f"\n<b>Upload</b>: {self.mode}\n\n"
             if not files:
                 await sendMessage(self.message, msg)
@@ -381,10 +381,9 @@ class MirrorLeechListener:
                 msg = f'<b>Name</b>: <code>{escape(name)}</code>\n\n<b>Size</b>: {size}'
             msg += f'\n\n<b>Type</b>: {typ}'
             if typ == "Folder":
-                msg += f' |<b>SubFolders</b>: {folders}'
-                msg += f' |<b>Files</b>: {files}'
-            msg += f'\n\n<b>#cc</b>: {self.tag} | <b>Elapsed</b>: {get_readable_time(time() - self.startTime)}'
-            msg += f"\n\n<b>Upload</b>: {self.mode}"
+                msg += f'\n<b>SubFolders</b>: {folders}'
+                msg += f'\n<b>Files</b>: {files}'
+            msg += f'\n<b>Cloned by</b>: {self.tag}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}'
             if config_dict['GDRIVE_ID'] != drive_id or self.select:
                 msg += f"\n\n<b>Folder id</b>: <code>{drive_id}</code>"
             buttons = ButtonMaker()
@@ -456,7 +455,6 @@ class MirrorLeechListener:
             if self.uid in self.sameDir:
                 self.sameDir.remove(self.uid)
         msg = f"{self.tag} your download has been stopped due to: {escape(error)}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
-        msg += f"\n<b>Upload</b>: {self.mode}"
         await sendMessage(self.message, msg, button)
         if self.logMessage:
             await sendMessage(self.logMessage, msg, button)
@@ -496,7 +494,6 @@ class MirrorLeechListener:
             if self.uid in self.sameDir:
                 self.sameDir.remove(self.uid)
         msg = f"{self.tag} {escape(error)}\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
-        msg += f"\n<b>Upload</b>: {self.mode}"
         await sendMessage(self.message, msg)
         if self.logMessage:
             await sendMessage(self.logMessage, msg)
