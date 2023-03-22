@@ -390,19 +390,19 @@ class MirrorLeechListener:
             buttons = ButtonMaker()
             if not config_dict['DISABLE_DRIVE_LINK']:
                 link = await sync_to_async(short_url, link)
-                buttons.ubutton("🔐 Drive Link", link)
+                buttons.ubutton("Drive Link", link)
             LOGGER.info(f'Done Uploading {name}')
             if INDEX_URL:= self.index_link or config_dict['INDEX_URL']:
                 url_path = url_quote(f'{name}')
                 if typ == "Folder":
                     share_url = await sync_to_async(short_url, f'{INDEX_URL}/{url_path}/')
-                    buttons.ubutton("📁 Index Link", share_url)
+                    buttons.ubutton("Index Link", share_url)
                 else:
                     share_url = await sync_to_async(short_url, f'{INDEX_URL}/{url_path}')
-                    buttons.ubutton("🚀 Index Link", share_url)
+                    buttons.ubutton("Index Link", share_url)
                     if config_dict['VIEW_LINK']:
                         share_urls = await sync_to_async(short_url, f'{INDEX_URL}/{url_path}?a=view')
-                        buttons.ubutton("💻 View Link", share_urls)
+                        buttons.ubutton("View Link", share_urls)
             buttons = extra_btns(buttons)
             if self.dmMessage:
                 await sendMessage(self.dmMessage, msg, buttons.build_menu(2))
@@ -415,7 +415,7 @@ class MirrorLeechListener:
             if self.logMessage:
                 if config_dict['DISABLE_DRIVE_LINK']:
                     link = await sync_to_async(short_url, link)
-                    buttons.ubutton("🔐 Drive Link", link, 'header')
+                    buttons.ubutton("Drive Link", link, 'header')
                 await sendMessage(self.logMessage, msg, buttons.build_menu(2))
             if self.seed and not self.isClone:
                 if self.isZip:
