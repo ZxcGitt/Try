@@ -333,7 +333,7 @@ class MirrorLeechListener:
             msg += f"\n<b>Elapsed</b>: {get_readable_time(time() - self.startTime)}"
             if typ != 0:
                 msg += f'\n<b>Corrupted Files</b>: {typ}'
-            msg += f'\n<b>Leeched by</b>: {self.tag}'
+            msg += f'\n<b>Leeched by</b>: {self.tag}\n'
             if not files:
                 await sendMessage(self.message, msg)
                 if self.logMessage:
